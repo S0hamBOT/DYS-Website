@@ -1,0 +1,33 @@
+/your-project
+├── .bolt/
+├── node_modules/
+├── src/
+│   ├── components/
+│   │   ├── About.tsx
+│   │   ├── Contact.tsx
+│   │   ├── Footer.tsx
+│   │   ├── Hero.tsx
+│   │   ├── JourneyPath.tsx
+│   │   ├── Navbar.tsx
+│   │   ├── Testimonials.tsx
+│   ├── data/
+│   │   ├── courseData.ts
+│   ├── pages/
+│   │   ├── Home.tsx
+│   ├── types/
+│   │   ├── index.ts
+│   ├── App.tsx
+│   ├── index.css
+│   ├── main.tsx
+│   ├── vite-env.d.ts
+├── .gitignore
+├── eslint.config.js
+├── index.html
+├── package-lock.json
+├── package.json
+├── postcss.config.js
+├── tailwind.config.js
+├── tsconfig.app.json
+├── tsconfig.json
+├── tsconfig.node.json
+└── vite.config.ts
