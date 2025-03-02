@@ -1,53 +1,82 @@
-import React from 'react';
-import { Sparkles } from 'lucide-react';
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
-const Hero: React.FC = () => {
+export default function LandingPage() {
+  const [gradient, setGradient] = useState("from-black via-[#1E3A8A] to-black");
+
+  useEffect(() => {
+    const gradients = [
+      "from-black via-[#1E3A8A] to-black",
+      "from-black via-[#243F96] to-black",
+      "from-black via-[#2D4AA0] to-black",
+      "from-black via-[#1E3A8A] to-black",
+    ];
+
+    let index = 0;
+    const interval = setInterval(() => {
+      index = (index + 1) % gradients.length;
+      setGradient(gradients[index]);
+    }, 4000); // Change gradient every 4 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#db7b0d] to-black z-0"></div>
-      
-      {/* Animated particles */}
-      <div className="absolute inset-0 z-10">
-        {Array.from({ length: 20 }).map((_, i) => (
-          <div 
-            key={i}
-            className="absolute rounded-full bg-white/20 animate-float"
-            style={{
-              width: `${Math.random() * 10 + 5}px`,
-              height: `${Math.random() * 10 + 5}px`,
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              animationDuration: `${Math.random() * 10 + 10}s`,
-              animationDelay: `${Math.random() * 5}s`
-            }}
-          />
-        ))}
-      </div>
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-20">
-        <div className="text-center">
-          <div className="inline-block mb-6">
-            <Sparkles size={48} className="text-amber-400 animate-pulse" />
-          </div>
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-            <span className="block">Discover Yourself</span>
-            <span className="block text-amber-300 mt-2">A Transformative Journey</span>
-          </h1>
-          <p className="text-xl md:text-2xl text-white/80 max-w-3xl mx-auto mb-10">
-            An enlightening course series by HG Radheshyam Das, guiding you through a spiritual journey of self-discovery and inner transformation.
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <button className="bg-amber-500 hover:bg-amber-600 text-white px-8 py-3 rounded-md text-lg font-medium transition-all transform hover:scale-105">
-              Begin Your Journey
-            </button>
-            <button className="bg-transparent border-2 border-white/50 hover:border-white text-white px-8 py-3 rounded-md text-lg font-medium transition-all transform hover:scale-105">
-              Learn More
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
+    <div className="relative min-h-screen flex flex-col items-center justify-center bg-[#1E3A8A] text-white">
+      {/* Background Gradient */}
+      <motion.div
+        className={`absolute inset-0 bg-gradient-to-b ${gradient}`}
+        animate={{ opacity: [0.9, 1, 0.9] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+      ></motion.div>
 
-export default Hero;
+      {/* Hero Section */}
+      <div className="text-center px-6 z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2 }}
+        >
+          <span className="px-4 py-2 text-sm font-semibold text-white border border-[#1E3A8A] bg-transparent rounded-full uppercase">
+            Discover Yourself
+          </span>
+        </motion.div>
+
+        <motion.h1
+          className="mt-6 text-5xl md:text-6xl font-extrabold leading-snug"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, delay: 0.3 }}
+        >
+          A Journey Within with <br />
+          <span className="text-[#F59E0B]">HG Radheshyam Das</span>
+        </motion.h1>
+
+        <motion.p
+          className="mt-4 text-lg text-gray-300 max-w-2xl mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, delay: 0.5 }}
+        >
+          A series from DYS 0 to DYS 8, guiding you towards self-discovery and
+          inner peace.
+        </motion.p>
+
+        {/* Call to Action Button */}
+        <motion.div
+          className="mt-8"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+        >
+          <button
+            className="px-8 py-3 text-lg font-medium border border-[#F59E0B] text-black bg-[#F59E0B] rounded-full 
+            hover:bg-amber-500 hover:text-black transition duration-300 hover:shadow-lg hover:shadow-[#F59E0B]"
+          >
+            Explore the Journey
+          </button>
+        </motion.div>
+      </div>
+    </div>
+  );
+}
